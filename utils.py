@@ -50,7 +50,7 @@ def update():
         if config not in configs:
             configs[config] = exp_configs[config]
 
-    save("config.json", configs)
+    save("config.json", configs.json())
 
     # requirements
     os.system("pip install -r requirements.txt")
