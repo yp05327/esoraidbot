@@ -105,9 +105,12 @@ async def on_message(message):
                 # check # char
                 event_name = event_name.replace('#', '')
                 if event_name is not "":
-                    raidinfo[event_name] = {}
-                    utils.save(config.info['record_file_name'], raidinfo)
-                    await client.send_message(message.channel, "Raid %s created." % event_name)
+                    if event_name in raidinfo:
+                        await client.send_message(message.channel, "Raid %s existed.Use !delete eventname to delete." % event_name)
+                    else:
+                        raidinfo[event_name] = {}
+                        utils.save(config.info['record_file_name'], raidinfo)
+                        await client.send_message(message.channel, "Raid %s created." % event_name)
                 else:
                     await client.send_message(message.channel, "Please use !create raidname.")
             else:
