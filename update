@@ -1,0 +1,8 @@
+[
+    "config.example.json"
+    "config.py",
+    "main.py",
+    "update.py",
+    "uitls.py",
+    "version"
+]
