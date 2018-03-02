@@ -1,0 +1,8 @@
+{
+	"installed": false,
+	"token": "",
+	"record_file_name": "record.json",
+	"role_list": ["tank", "healer", "dps"],
+	"superadmin": "",
+	"admin_list": []
+}
