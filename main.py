@@ -164,20 +164,18 @@ async def on_message(message):
             else:
                 await client.send_message(message.channel, "You do not have permission to use this command.")
 
-    # superadmin command
+    # first command
     if message.content.startswith("!install"):
         if client.user != message.author:
-            # check permission
-            if message.author.name == config.info['superadmin']:
-                if config.info['installed'] == False:
-                    config.info['superadmin'] = message.author.name
-                    config.info['admin_list'].append(message.author.name)
-                    config.save()
-                    await client.send_message(message.channel, "Installed by %s." % message.author.name)
-                else:
-                    await client.send_message(message.channel, "Has been installed.")
+            if not config.info['installed']:
+                config.info['superadmin'] = message.author.name
+                config.info['admin_list'].append(message.author.name)
+                config.save()
+                await client.send_message(message.channel, "Installed by %s." % message.author.name)
             else:
-                await client.send_message(message.channel, "You do not have permission to use this command.")
+                await client.send_message(message.channel, "Has been installed.")
+        else:
+            await client.send_message(message.channel, "You do not have permission to use this command.")
 
     # superadmin command
     if message.content.startswith("!alladmin"):
