@@ -1,8 +1,10 @@
-[
-    "config.example.json"
-    "config.py",
-    "main.py",
-    "update.py",
-    "uitls.py",
-    "version"
-]
+{
+	"file_name": [
+		"config.example.json",
+		"config.py",
+		"main.py",
+		"update.py",
+		"uitls.py",
+		"version"
+	]
+}
