@@ -57,8 +57,7 @@ def update():
 
     # restart
     python = sys.executable
-    os.execl(python, 'python3', 'main.py')
-    os.execl(python, 'python', 'main.py')
+    os.execl(python, python, * sys.argv)
 
 
 
