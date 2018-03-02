@@ -2,8 +2,9 @@
 	"file_name": [
 		"config.example.json",
 		"config.py",
+		"dataupdate.py",
 		"main.py",
-		"update.py",
+		"requirements.txt",
 		"uitls.py",
 		"version"
 	]
