@@ -20,9 +20,9 @@ def read(file_name):
 
     return jsoninfo
 
-def save(file_name, json):
+def save(file_name, info):
     with open(file_name, "w") as f:
-        json.dump(json, f)
+        json.dump(info, f)
 
 def read_version():
     if os.path.exists('version'):
@@ -50,7 +50,7 @@ def update():
         if config not in configs:
             configs[config] = exp_configs[config]
 
-    save("config.json", configs.json())
+    save("config.json", configs)
 
     # requirements
     os.system("pip install -r requirements.txt")
