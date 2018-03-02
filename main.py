@@ -19,7 +19,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith("!all"):
+    if message.content.startswith("!allraid"):
         if client.user != message.author:
             if raidinfo is {}:
                 await client.send_message(message.channel, "No available event now.")
@@ -73,7 +73,7 @@ async def on_message(message):
             if event_name in raidinfo:
                 raidinfo[event_name][message.author.name] = role
                 utils.save(config.info['record_file_name'], raidinfo)
-                em = discord.Embed(title="%s has joined $s" % (message.author.name, event_name), description="Role:" + config.info['role_list'][role], colour=0x0000FF)
+                em = discord.Embed(title="%s has joined %s" % (message.author.name, event_name), description="Role:" + config.info['role_list'][role], colour=0x0000FF)
                 await client.send_message(message.channel, embed=em)
             else:
                 await client.send_message(message.channel, "Can't find this event.")
@@ -85,7 +85,7 @@ async def on_message(message):
                 if message.author.name in raidinfo[event_name]:
                     del raidinfo[event_name][message.author.name]
                     utils.save(config.info['record_file_name'], raidinfo)
-                    em = discord.Embed(title="%s has unjoined $s" % (message.author.name, event_name), description="", colour=0x00FF00)
+                    em = discord.Embed(title="%s has unjoined %s" % (message.author.name, event_name), description="", colour=0x00FF00)
                     await client.send_message(message.channel, embed=em)
                 else:
                     await client.send_message(message.channel, "You have not joined this event.Use !join eventname#role to join.")
@@ -230,7 +230,7 @@ async def on_message(message):
                 role_string += role + "(%d)/" % config.info['role_list'].index(role)
 
             # normal command
-            help_string = "!all\nShow all avaliable events.\n\n" \
+            help_string = "!allraid\nShow all avaliable events.\n\n" \
                           "!status eventname\nTo show the status of a event.\n\n" \
                           "!join eventname#role\nTo join a event.Role code is " + role_string + "\n\n" \
                           "!gugugu eventname\nTo unjoin a event.\n\n" \
