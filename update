@@ -5,7 +5,7 @@
 		"dataupdate.py",
 		"main.py",
 		"requirements.txt",
-		"uitls.py",
+		"utils.py",
 		"version"
 	]
 }

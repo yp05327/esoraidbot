@@ -39,12 +39,12 @@ def checkupdate():
 def update():
     update_list = json.loads(requests.get(github_raw_url + 'update').content)
     for file_name in update_list['file_name']:
-        file_info = requests.get(github_raw_url + file_name).content
+        file_info = requests.get(github_raw_url + file_name).content.decode(encoding='utf-8')
         with open(file_name, "w") as f:
             f.write(file_info)
 
     # check config.json
-    exp_configs = read("config.esample.json")
+    exp_configs = read("config.example.json")
     configs = read("config.json")
     for config in exp_configs:
         if config not in configs:
