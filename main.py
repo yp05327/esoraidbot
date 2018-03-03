@@ -20,6 +20,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    utils.check_out_of_date_event(raidinfo, config.info['record_file_name'])
     if message.content.startswith("!allraid"):
         if client.user != message.author:
             if raidinfo is {}:

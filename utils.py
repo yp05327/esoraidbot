@@ -86,6 +86,10 @@ def update():
     python = sys.executable
     os.execl(python, python, * sys.argv)
 
-
+def check_out_of_date_event(raidinfo, file_name):
+    for event in raidinfo:
+        if datetime.datetime.utcnow() - event['time'] - 3600 * 2 >= 0:
+            del raidinfo[event]
+            save(file_name, raidinfo)
 
 
