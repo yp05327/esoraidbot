@@ -3,6 +3,8 @@ import json
 import os
 import sys
 import requests
+import time
+import datetime
 
 github_raw_url = "https://raw.githubusercontent.com/yp05327/esoraidbot/master/"
 
@@ -23,6 +25,22 @@ def read(file_name):
 def save(file_name, info):
     with open(file_name, "w") as f:
         json.dump(info, f)
+
+def change_timezone(year, month, day, hour, minute, timezone, new_timezone):
+    timezone = datetime.timezone(datetime.timedelta(hours=timezone))
+    new_timezone = datetime.timezone(datetime.timedelta(hours=new_timezone))
+    return datetime.datetime(year, month, day, hour, minute, tzinfo=timezone).replace(tzinfo=timezone).astimezone(tz=new_timezone)
+
+def get_timetick(year, month, day, hour, minute, timezone):
+    # change time to UTC time tick
+    dt = change_timezone(year, month, day, hour, minute, timezone, 0)
+
+    return time.mktime(time.strptime(dt.strftime('%Y-%m-%d %H:%M:%S'), '%Y-%m-%d %H:%M:%S'))
+
+def get_time(tick, timezone):
+    dt = datetime.datetime.fromtimestamp(tick)
+    dt = change_timezone(dt.year, dt.month, dt.day, dt.hour, dt.minute, 0, timezone)
+    return dt.year, dt.month, dt.day, dt.hour, dt.minute
 
 def read_version():
     if os.path.exists('version'):
@@ -54,6 +72,15 @@ def update():
 
     # requirements
     os.system("pip install -r requirements.txt")
+
+    # update version
+    version = read_version()
+    new_version = checkupdate()
+    if version:
+        version[0:3] = new_version[0:3]
+        save('version', version)
+    else:
+        print("Can't read version file, update failed.")
 
     # restart
     python = sys.executable
