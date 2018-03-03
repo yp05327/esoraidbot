@@ -88,7 +88,9 @@ def update():
 
 def check_out_of_date_event(raidinfo, file_name):
     for event in raidinfo:
-        if datetime.datetime.utcnow() - event['time'] - 3600 * 2 >= 0:
+        utc_now = datetime.datetime.utcnow()
+        utc_now = get_timetick(utc_now.year, utc_now.month, utc_now.day, utc_now.hour, utc_now.minute, 0)
+        if utc_now - event['time'] - 3600 * 2 >= 0:
             del raidinfo[event]
             save(file_name, raidinfo)
 
