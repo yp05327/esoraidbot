@@ -77,7 +77,7 @@ def update():
     version = read_version()
     new_version = checkupdate()
     if version:
-        version[0:3] = new_version[0:3]
+        version[0:4] = new_version[0:4]
         save('version', version)
     else:
         print("Can't read version file, update failed.")
