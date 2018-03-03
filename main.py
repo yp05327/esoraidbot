@@ -249,6 +249,7 @@ async def on_message(message):
     if message.content.startswith("!install"):
         if client.user != message.author:
             if not config.info['installed']:
+                config.info['installed'] = True
                 config.info['superadmin'] = message.author.name
                 config.info['admin_list'].append(message.author.name)
                 config.save()
