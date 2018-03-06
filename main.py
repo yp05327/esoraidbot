@@ -252,7 +252,8 @@ async def on_message(message):
             if not config.info['installed']:
                 config.info['installed'] = True
                 config.info['superadmin'] = message.author.name
-                config.info['admin_list'].append(message.author.name)
+                if not message.author.name in config.info['admin_list']:
+                    config.info['admin_list'].append(message.author.name)
                 config.save()
                 await client.send_message(message.channel, "Installed by %s." % message.author.name)
             else:
