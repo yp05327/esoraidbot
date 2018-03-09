@@ -4,10 +4,11 @@ import discord
 import config
 import utils
 import dataupdate
-import time
+import random
 
 client = discord.Client()
 raidinfo = {}
+trials = ['aa','so', 'as', 'hrc', 'mol', 'hof']
 
 @client.event
 async def on_ready():
@@ -120,6 +121,10 @@ async def on_message(message):
     if message.content.startswith("!checkname"):
         if client.user != message.author:
             await client.send_message(message.channel, message.author.name)
+
+    if message.content.startswith("!random"):
+        if client.user != message.author:
+            await client.send_message(message.channel, random.choice(trials))
 
     # admin command
     if message.content.startswith("!create"):
@@ -316,7 +321,8 @@ async def on_message(message):
                           "!status eventname\nTo show the status of a event.Default timezone is UTC, you can use !status eventname-UTC+8 to show UTC+8 time.\n\n" \
                           "!join eventname#role\nTo join a event.Role code is " + role_string + "\n\n" \
                           "!gugugu eventname\nTo unjoin a event.\n\n" \
-                          "!checkname\nTo print your user name."
+                          "!checkname\nTo print your user name.\n\n" \
+                          "!random\nTo show a random trial."
             em = discord.Embed(title="Normal Command You Can Use", description=help_string, colour=0x00FFFF)
             await client.send_message(message.channel, embed=em)
 
