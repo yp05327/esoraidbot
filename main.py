@@ -35,7 +35,7 @@ async def on_message(message):
                 events = ""
                 for event in raidinfo:
                     year, month, day, hour, minute = utils.get_time(raidinfo[event]['time'], timezone)
-                    events += event + "(%d)  %d-%d-%d %d:%d\n" % (len(raidinfo[event]['players']), year, month, day, hour, minute)
+                    events += event + "(%d)  %d-%02d-%02d %02d:%02d\n" % (len(raidinfo[event]['players']), year, month, day, hour, minute)
 
                 em = discord.Embed(title="Available Events", description=events,colour=0xFFFF00)
                 await client.send_message(message.channel, embed=em)
@@ -61,7 +61,7 @@ async def on_message(message):
                         player_list = "No player had joined this event."
 
                     year, month, day, hour, minute = utils.get_time(raidinfo[event_name]['time'], timezone)
-                    em = discord.Embed(title="%s Created by %s Time: %d-%d-%d %d:%d" % (event_name, raidinfo[event_name]['owner'], year, month, day, hour, minute),description=player_list, colour=0xFF0000)
+                    em = discord.Embed(title="%s Created by %s Time: %d-%02d-%02d %02d:%02d" % (event_name, raidinfo[event_name]['owner'], year, month, day, hour, minute),description=player_list, colour=0xFF0000)
 
                     await client.send_message(message.channel, embed=em)
                 else:
