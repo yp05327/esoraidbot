@@ -42,7 +42,7 @@ async def on_message(message):
 
     if message.content.startswith("!status"):
         if client.user != message.author:
-            _message = message.content[8:].split('-')
+            _message = message.content[8:].split(' ')
 
             event_name = _message[0]
             if len(_message) == 2:
@@ -133,9 +133,9 @@ async def on_message(message):
             if message.author.name in config.info['admin_list']  or message.author.name == config.info['superadmin']:
                 _message = message.content[8:]
                 # check # char
-                _message = _message.replace('#', '')
+                _message = _message.replace('#', ' ')
 
-                _message = _message.split('-')
+                _message = _message.split(' ')
                 if len(_message) > 7:
                     await client.send_message(message.channel, "Wrong input,please check your input.")
                     return
@@ -170,7 +170,7 @@ async def on_message(message):
             # check permission
             if message.author.name in config.info['admin_list'] or message.author.name == config.info['superadmin']:
                 _message = message.content[12:]
-                _message = _message.split('-')
+                _message = _message.split(' ')
                 if len(_message) > 7:
                     await client.send_message(message.channel, "Wrong input,please check your input.")
                     return
@@ -207,7 +207,7 @@ async def on_message(message):
     if message.content.startswith("!delete"):
         if client.user != message.author:
             # check permission
-            if message.author.name in config.info['admin_list']  or message.author.name == config.info['superadmin']:
+            if message.author.name in config.info['admin_list'] or message.author.name == config.info['superadmin']:
                 event_name = message.content[8:]
                 if event_name is not "":
                     del raidinfo[event_name]
@@ -318,7 +318,7 @@ async def on_message(message):
 
             # normal command
             help_string = "!allraid\nShow all avaliable events.Default timezone is UTC, you can use !allraid UTC+8 to show UTC+8 time.\n\n" \
-                          "!status eventname\nTo show the status of a event.Default timezone is UTC, you can use !status eventname-UTC+8 to show UTC+8 time.\n\n" \
+                          "!status eventname\nTo show the status of a event.Default timezone is UTC, you can use !status eventname UTC+8 to show UTC+8 time.\n\n" \
                           "!join eventname#role\nTo join a event.Role code is " + role_string + "\n\n" \
                           "!gugugu eventname\nTo unjoin a event.\n\n" \
                           "!checkname\nTo print your user name.\n\n" \
@@ -328,8 +328,8 @@ async def on_message(message):
 
             # admin command
             if message.author.name in config.info['admin_list']:
-                help_string = "!create eventname-year-month-day-hour-minute\nCreate a new event.Don't use '#' and '-' in event name.\nDefault timezone is UTC, you can use !create eventname-year-month-day-hour-minute-UTC+8 to create UTC+8 time event.\n\n" \
-                              "!changetime eventname-year-month-day-hour-minute\nChange event time.Only the owner of the event and superadmin can change time.\nDefault timezone is UTC, you can use !changetime eventname-year-month-day-hour-minute-UTC+8 to create UTC+8 time event.\n\n" \
+                help_string = "!create eventname year month day hour minute\nCreate a new event.Don't use '#' and ' '(space) in event name.\nDefault timezone is UTC, you can use !create eventname year month day hour minute UTC+8 to create UTC+8 time event.\n\n" \
+                              "!changetime eventname year month day hour minute\nChange event time.Only the owner of the event and superadmin can change time.\nDefault timezone is UTC, you can use !changetime eventname year month day hour minute UTC+8 to create UTC+8 time event.\n\n" \
                               "!delete eventname\nTo delete a event.\n\n" \
                               "!update\nTo check and update new version.\n\n" \
                               "!checkupdate\nTo check new version\n\n" \
