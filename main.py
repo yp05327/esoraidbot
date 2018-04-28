@@ -131,7 +131,7 @@ async def on_message(message):
         if client.user != message.author:
             # check permission
             if message.author.name in config.info['admin_list']  or message.author.name == config.info['superadmin']:
-                _message = message.content[8:]
+                _message = message.content[8:].lower()
                 # check # char
                 _message = _message.replace('#', ' ')
 
