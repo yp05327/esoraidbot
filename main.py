@@ -71,7 +71,7 @@ async def on_message(message):
 
     if message.content.startswith("!join"):
         if client.user != message.author:
-            _message = message.content[6:].split('#').lower()
+            _message = message.content[6:].lower().split('#')
             if len(_message) != 2:
                 await client.send_message(message.channel, "Wrong input,please check your input.")
                 return
@@ -131,7 +131,7 @@ async def on_message(message):
         if client.user != message.author:
             # check permission
             if message.author.name in config.info['admin_list']  or message.author.name == config.info['superadmin']:
-                _message = message.content[8:].lower()
+                _message = message.content[8:]
                 # check # char
                 _message = _message.replace('#', ' ')
 
