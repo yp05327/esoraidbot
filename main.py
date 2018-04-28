@@ -44,7 +44,7 @@ async def on_message(message):
         if client.user != message.author:
             _message = message.content[8:].split(' ')
 
-            event_name = _message[0]
+            event_name = _message[0].lower()
             if len(_message) == 2:
                 timezone = int(_message[1][3:])
             else:
@@ -71,7 +71,7 @@ async def on_message(message):
 
     if message.content.startswith("!join"):
         if client.user != message.author:
-            _message = message.content[6:].split('#')
+            _message = message.content[6:].split('#').lower()
             if len(_message) != 2:
                 await client.send_message(message.channel, "Wrong input,please check your input.")
                 return
@@ -106,7 +106,7 @@ async def on_message(message):
 
     if message.content.startswith("!gugugu"):
         if client.user != message.author:
-            event_name = message.content[8:]
+            event_name = message.content[8:].lower()
             if event_name is not "":
                 if message.author.name in raidinfo[event_name]['players']:
                     del raidinfo[event_name]['players'][message.author.name]
@@ -131,7 +131,7 @@ async def on_message(message):
         if client.user != message.author:
             # check permission
             if message.author.name in config.info['admin_list']  or message.author.name == config.info['superadmin']:
-                _message = message.content[8:]
+                _message = message.content[8:].lower()
                 # check # char
                 _message = _message.replace('#', ' ')
 
@@ -169,7 +169,7 @@ async def on_message(message):
         if client.user != message.author:
             # check permission
             if message.author.name in config.info['admin_list'] or message.author.name == config.info['superadmin']:
-                _message = message.content[12:]
+                _message = message.content[12:].lower()
                 _message = _message.split(' ')
                 if len(_message) > 7:
                     await client.send_message(message.channel, "Wrong input,please check your input.")
@@ -208,7 +208,7 @@ async def on_message(message):
         if client.user != message.author:
             # check permission
             if message.author.name in config.info['admin_list'] or message.author.name == config.info['superadmin']:
-                event_name = message.content[8:]
+                event_name = message.content[8:].lower()
                 if event_name is not "":
                     del raidinfo[event_name]
                     utils.save(config.info['record_file_name'], raidinfo)
